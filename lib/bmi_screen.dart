@@ -34,7 +34,8 @@ class _BmiScreenState extends State<BmiScreen> {
                         Icon(Icons.female, size: 60),
                         Text(
                           'Female',
-                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
@@ -49,7 +50,8 @@ class _BmiScreenState extends State<BmiScreen> {
                         Icon(Icons.female, size: 60),
                         Text(
                           'Female',
-                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
@@ -58,7 +60,52 @@ class _BmiScreenState extends State<BmiScreen> {
               ),
             ),
           ),
-          Expanded(child: Row()),
+          Expanded(
+              child: Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(color: Colors.purple),
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Colors.purple[200],
+                      borderRadius: BorderRadius.circular(15)),
+
+                  child: Column(
+                    children: [
+                      const Text(
+                        'HEIGHT',
+                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 8,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: const [
+                          Text(
+                            '180',
+                            style: TextStyle(
+                                fontSize: 40, fontWeight: FontWeight.w800),
+                          ),
+                          Text(
+                            'CM',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Slider(
+                          value: 100,
+                          min: 80,
+                          max: 240,
+                          onChanged: (value){
+                            print(value.round());
+                          }
+                          )
+                    ],
+                  ),
+                ),
+              )),
           Expanded(child: Row()),
           Container(
             width: double.infinity,
