@@ -1,34 +1,38 @@
+import 'dart:math';
+
+import 'package:bmi_calculator/bmi_result_screen.dart';
 import 'package:flutter/material.dart';
 
-class BmiScreen extends StatefulWidget {
-  const BmiScreen({Key? key}) : super(key: key);
+class BMIScreen extends StatefulWidget {
+  const BMIScreen({Key? key}) : super(key: key);
 
   @override
-  _BmiScreenState createState() => _BmiScreenState();
+  _BMIScreenState createState() => _BMIScreenState();
 }
 
-class _BmiScreenState extends State<BmiScreen> {
+class _BMIScreenState extends State<BMIScreen> {
   bool isFemale = true;
   double height = 156;
   int weight = 46;
   int age = 23;
 
-
-  var color = Colors.tealAccent;
+  var backgroundColor = Colors.white70;
+  var containersBackgroundColor = Colors.grey[400];
+  var selectedColor = Colors.pinkAccent;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           title: Text('BMI CALCULATOR'),
-          backgroundColor: Colors.purple,
+          backgroundColor: selectedColor,
           centerTitle: true),
       body: Column(
         children: [
           Expanded(
             child: Container(
               padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(color: Colors.purple),
+              decoration: BoxDecoration(color: backgroundColor),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -37,20 +41,18 @@ class _BmiScreenState extends State<BmiScreen> {
                       onTap: () {
                         isFemale = true;
                         print(isFemale);
-                        setState(() {
-
-                        });
-
+                        setState(() {});
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.purple[200],
+                            color: containersBackgroundColor,
                             borderRadius: BorderRadius.circular(15),
-                          border: isFemale?  Border.all(
-                            width: 6,
-                            color: color,
-                          ) : null
-                        ),
+                            border: isFemale
+                                ? Border.all(
+                                    width: 6,
+                                    color: selectedColor,
+                                  )
+                                : null),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -73,21 +75,18 @@ class _BmiScreenState extends State<BmiScreen> {
                       onTap: () {
                         isFemale = false;
                         print(isFemale);
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.purple[200],
+                            color: containersBackgroundColor,
                             borderRadius: BorderRadius.circular(15),
-                            border: !isFemale?  Border.all(
-                              width: 6,
-                              color: color,
-                            ) : null
-
-                        ),
-
+                            border: !isFemale
+                                ? Border.all(
+                                    width: 6,
+                                    color: selectedColor,
+                                  )
+                                : null),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -109,11 +108,11 @@ class _BmiScreenState extends State<BmiScreen> {
           Expanded(
               child: Container(
             padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(color: Colors.purple),
+            decoration: BoxDecoration(color: backgroundColor),
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  color: Colors.purple[200],
+                  color: containersBackgroundColor,
                   borderRadius: BorderRadius.circular(15)),
               child: Column(
                 children: [
@@ -142,15 +141,15 @@ class _BmiScreenState extends State<BmiScreen> {
                     ],
                   ),
                   Slider(
-                      value: height,
-                      min: 80,
-                      max: 240,
-                      onChanged: (value) {
-                        setState(() {
-
-                        });
-                        height = value;
-                      })
+                    value: height,
+                    min: 80,
+                    max: 240,
+                    onChanged: (value) {
+                      setState(() {});
+                      height = value;
+                    },
+                    activeColor: selectedColor,
+                  )
                 ],
               ),
             ),
@@ -158,7 +157,7 @@ class _BmiScreenState extends State<BmiScreen> {
           Expanded(
               child: Container(
             padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(color: Colors.purple),
+            decoration: BoxDecoration(color: backgroundColor),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -166,7 +165,7 @@ class _BmiScreenState extends State<BmiScreen> {
                   child: Container(
                     // padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                     decoration: BoxDecoration(
-                        color: Colors.purple[200],
+                        color: containersBackgroundColor,
                         borderRadius: BorderRadius.circular(15)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -185,41 +184,42 @@ class _BmiScreenState extends State<BmiScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FloatingActionButton(
-                              backgroundColor: Colors.grey,
+                              backgroundColor: selectedColor,
                               mini: true,
                               child: Icon(Icons.remove),
                               onPressed: () {
                                 weight--;
-                                setState(() {
-
-                                });
+                                setState(() {});
                               },
+                              heroTag: 'weight+',
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             FloatingActionButton(
-                              backgroundColor: Colors.grey,
+                              backgroundColor: selectedColor,
                               mini: true,
                               child: Icon(Icons.add),
                               onPressed: () {
                                 weight++;
-                                setState(() {
-
-                                });
-                              },                            )
+                                setState(() {});
+                              },
+                              heroTag: 'weight-',
+                            )
                           ],
                         )
                       ],
                     ),
                   ),
                 ),
-                SizedBox(width: 20,),
+                SizedBox(
+                  width: 20,
+                ),
                 Expanded(
                   child: Container(
                     // padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                     decoration: BoxDecoration(
-                        color: Colors.purple[200],
+                        color: containersBackgroundColor,
                         borderRadius: BorderRadius.circular(15)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -238,29 +238,27 @@ class _BmiScreenState extends State<BmiScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FloatingActionButton(
-                              backgroundColor: Colors.grey,
+                              backgroundColor: selectedColor,
                               mini: true,
                               child: Icon(Icons.remove),
                               onPressed: () {
                                 age--;
-                                setState(() {
-
-                                });
+                                setState(() {});
                               },
+                              heroTag: 'age-',
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             FloatingActionButton(
-                              backgroundColor: Colors.grey,
+                              backgroundColor: selectedColor,
                               mini: true,
                               child: Icon(Icons.add),
                               onPressed: () {
                                 age++;
-                                setState(() {
-
-                                });
+                                setState(() {});
                               },
+                              heroTag: 'age+',
                             )
                           ],
                         )
@@ -273,9 +271,20 @@ class _BmiScreenState extends State<BmiScreen> {
           )),
           Container(
             width: double.infinity,
-            color: Colors.purple,
+            color: selectedColor,
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                double result = weight / pow(height / 100, 2);
+                print(result);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BMIResultScreen(
+                              isFemale: isFemale,
+                              age: age,
+                              result: result,
+                            )));
+              },
               child: Text(
                 'calculate',
                 style: TextStyle(color: Colors.white, fontSize: 35),
