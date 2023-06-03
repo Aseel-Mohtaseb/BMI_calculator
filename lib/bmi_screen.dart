@@ -8,6 +8,14 @@ class BmiScreen extends StatefulWidget {
 }
 
 class _BmiScreenState extends State<BmiScreen> {
+  bool isFemale = true;
+  double height = 156;
+  int weight = 46;
+  int age = 23;
+
+
+  var color = Colors.tealAccent;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,36 +32,74 @@ class _BmiScreenState extends State<BmiScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                        color: Colors.purple[200],
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Column(
-                      children: [
-                        Icon(Icons.female, size: 60),
-                        Text(
-                          'Female',
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                        )
-                      ],
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        isFemale = true;
+                        print(isFemale);
+                        setState(() {
+
+                        });
+
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.purple[200],
+                            borderRadius: BorderRadius.circular(15),
+                          border: isFemale?  Border.all(
+                            width: 6,
+                            color: color,
+                          ) : null
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.female, size: 60),
+                            Text(
+                              'Female',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                        color: Colors.purple[200],
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Column(
-                      children: [
-                        Icon(Icons.female, size: 60),
-                        Text(
-                          'Female',
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                        )
-                      ],
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        isFemale = false;
+                        print(isFemale);
+                        setState(() {
+
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.purple[200],
+                            borderRadius: BorderRadius.circular(15),
+                            border: !isFemale?  Border.all(
+                              width: 6,
+                              color: color,
+                            ) : null
+
+                        ),
+
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.male, size: 60),
+                            Text(
+                              'Male',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -62,54 +108,179 @@ class _BmiScreenState extends State<BmiScreen> {
           ),
           Expanded(
               child: Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(color: Colors.purple),
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: Colors.purple[200],
-                      borderRadius: BorderRadius.circular(15)),
-
-                  child: Column(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(color: Colors.purple),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: Colors.purple[200],
+                  borderRadius: BorderRadius.circular(15)),
+              child: Column(
+                children: [
+                  const Text(
+                    'HEIGHT',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
                     children: [
-                      const Text(
-                        'HEIGHT',
-                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      Text(
+                        '${height.round()}',
+                        style: TextStyle(
+                            fontSize: 40, fontWeight: FontWeight.w800),
                       ),
-                      SizedBox(height: 8,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: const [
-                          Text(
-                            '180',
-                            style: TextStyle(
-                                fontSize: 40, fontWeight: FontWeight.w800),
-                          ),
-                          Text(
-                            'CM',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      Text(
+                        'CM',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Slider(
-                          value: 100,
-                          min: 80,
-                          max: 240,
-                          onChanged: (value){
-                            print(value.round());
-                          }
-                          )
                     ],
                   ),
+                  Slider(
+                      value: height,
+                      min: 80,
+                      max: 240,
+                      onChanged: (value) {
+                        setState(() {
+
+                        });
+                        height = value;
+                      })
+                ],
+              ),
+            ),
+          )),
+          Expanded(
+              child: Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(color: Colors.purple),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Container(
+                    // padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    decoration: BoxDecoration(
+                        color: Colors.purple[200],
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'WEIGHT',
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '$weight',
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.w800),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              mini: true,
+                              child: Icon(Icons.remove),
+                              onPressed: () {
+                                weight--;
+                                setState(() {
+
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              mini: true,
+                              child: Icon(Icons.add),
+                              onPressed: () {
+                                weight++;
+                                setState(() {
+
+                                });
+                              },                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              )),
-          Expanded(child: Row()),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    // padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    decoration: BoxDecoration(
+                        color: Colors.purple[200],
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'AGE',
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '$age',
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.w800),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              mini: true,
+                              child: Icon(Icons.remove),
+                              onPressed: () {
+                                age--;
+                                setState(() {
+
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              mini: true,
+                              child: Icon(Icons.add),
+                              onPressed: () {
+                                age++;
+                                setState(() {
+
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )),
           Container(
             width: double.infinity,
-            child: ElevatedButton(onPressed: () {}, child: Text('calculate')),
+            color: Colors.purple,
+            child: MaterialButton(
+              onPressed: () {},
+              child: Text(
+                'calculate',
+                style: TextStyle(color: Colors.white, fontSize: 35),
+              ),
+            ),
           )
         ],
       ),
